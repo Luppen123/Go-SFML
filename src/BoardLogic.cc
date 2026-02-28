@@ -1,9 +1,9 @@
 #include "BoardLogic.h"
 #include <cmath>
 
-int BoardLogic::CalculateX(const int& xPixel, const float& margin)
+int BoardLogic::CalculateX(const int& xPixel, const float& margin, const float& cellSize)
 {
-    int roundedX = std::round((static_cast<float>(xPixel) - margin) / m_BoardSize);
+    int roundedX = std::round((static_cast<float>(xPixel) - margin) / cellSize);
     
     if(roundedX < 0)
         return 0;

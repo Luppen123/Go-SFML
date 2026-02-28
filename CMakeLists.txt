@@ -26,23 +26,23 @@ target_compile_features(main
         cxx_std_17
 )
 
-
-
 #Defining subfiles
-add_library(BoardRender)
+add_library(Headers)
 
-target_sources(BoardRender
+target_sources(Headers
     PRIVATE
         src/BoardRender.cc
+        src/BoardLogic.cc
     PUBLIC
         FILE_SET HEADERS
         BASE_DIRS
             include
         FILES
             include/BoardRender.h
+            include/BoardLogic.h
 )
 
-target_link_libraries(BoardRender
+target_link_libraries(Headers
     PUBLIC
         sfml-graphics
 )
@@ -50,7 +50,7 @@ target_link_libraries(BoardRender
 target_link_libraries(main 
     PRIVATE
         sfml-graphics
-        BoardRender
+        Headers
 )
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT main)

@@ -29,7 +29,10 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
-                std::cout << bl.CalculateX(event.mouseButton.x, 25.f);
+            {
+                std::cout << event.mouseButton.x << std::endl;
+            }
+                
         }
         
         int boardSize = 9;

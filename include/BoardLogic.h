@@ -27,7 +27,7 @@ private:
 
 public:
     BoardLogic(int bs) : m_BoardSize(bs) {}
-    int CalculateX(const int& xPixel, const float& margin);
+    int CalculateX(const int& xPixel, const float& margin, const float& cellSize);
     int CalculateY(const int& yPixel, const float& margin);
     std::pair<int, int> CalculateXY(const int& xPixel, const int& yPixel, const float& margin);
 };
