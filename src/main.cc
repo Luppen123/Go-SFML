@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "BoardRender.h"
+#include "BoardLogic.h"
 
 int main()
 {
@@ -20,12 +21,15 @@ int main()
 
     while (window.isOpen())
     {
+        BoardLogic bl(9);
+
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-            
+            if (event.type == sf::Event::MouseButtonPressed)
+                std::cout << bl.CalculateX(event.mouseButton.x, 25.f);
         }
         
         int boardSize = 9;
@@ -34,6 +38,7 @@ int main()
         
         window.clear();
 
+        
         BoardRender br(window, cellSize, margin);
         br.drawBoard(boardSize);
         window.display();

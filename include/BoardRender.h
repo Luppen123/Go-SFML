@@ -2,29 +2,7 @@
 #define BOARD_RENDER_H
 
 #include <vector>
-
-enum class Stone
-{
-    None,
-    Black, 
-    White
-};
-
-struct Intersection 
-{
-    unsigned x;
-    unsigned y;
-    unsigned liberties;
-    Stone stone = Stone::None;
-};
-
-struct Group
-{
-    Stone color;
-    std::vector<int> StonesInGroup;
-    unsigned liberties;
-};
-
+#include "Stone.h"
 
 class BoardRender
 {
@@ -40,6 +18,7 @@ public:
         window(w), cellSize(cs), margin(m) {}
 
     void drawBoard(int boardSize);
+    void drawStone();
 };
 
 
