@@ -6,6 +6,8 @@
 
 int main()
 {
+
+    //DODAC JAKO CZESC WIDOKU
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
@@ -18,11 +20,24 @@ int main()
     //origin set to the middle of the board itself
     boardShape.setOrigin(boardShape.getSize() / 2.f);
     boardShape.setPosition(sf::Vector2f(window.getSize()) / 2.f);
+    //DODAC JAKO CZESC WIDKOU
 
+
+    //Zrobic z tego stale albo wczytac jako input
+    int boardSize = 9;
+    float cellSize = 40.f;
+    float margin = 25.f;
+
+    //Zrobic z tego stale albo wczytac jako input
+    
+
+    BoardLogic bl(boardSize);
+    bl.printBoardState();
+    BoardRender br(window, cellSize, margin, bl);
+
+    
     while (window.isOpen())
     {
-        BoardLogic bl(9);
-
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -30,20 +45,23 @@ int main()
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                std::cout << event.mouseButton.x << std::endl;
+                // std::cout << event.mouseButton.x << std::endl;
+                // std::cout << event.mouseButton.y << std::endl;
+                int cord = br.GetCoordinatesLogical(event.mouseButton.x, event.mouseButton.y);
+
+                std::cout << cord << std::endl;
             }
                 
         }
-        
-        int boardSize = 9;
-        float cellSize = 40.f;
-        float margin = 25.f;
-        
-        window.clear();
 
         
-        BoardRender br(window, cellSize, margin);
-        br.drawBoard(boardSize);
+        // sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+        // std::pair<int, int> mouseCords = br.GetCoordinatesGraphical(mousePos.x, mousePos.y);
+        // std::cout << mouseCords.first << " " << mouseCords.second << std::endl;
+        
+        window.clear();
+        br.drawBoard();
+        br.drawStoneHiglight(Stone::White);
         window.display();
     }
 

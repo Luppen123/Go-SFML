@@ -3,33 +3,45 @@
 
 #include <utility>
 #include <vector>
+#include <set>
+#include <cmath>
+#include <iostream>
 #include "Stone.h"
-
 
 struct Intersection 
 {
-    int liberties;
     Stone stone = Stone::None;
+
+    bool isEmpty() const { return stone == Stone::None; }
+    bool isWall() const { return stone == Stone::Wall; }
 };
 
 struct Group
 {
     Stone color;
-    std::vector<int> StonesInGroup;
-    int liberties;
+    std::vector<std::pair<int, int>> stonesCount;
+    std::set<std::pair<int, int>> liberties;
 };
 
 class BoardLogic
 {
 private:
-    int m_BoardSize;
-    std::vector<std::vector<Intersection>> m_boardVector;
+    Stone m_currentPlayer;
+    int m_boardSize;
+    int m_vectorWidth;
+    std::vector<Intersection> m_boardVector;
+    std::vector<Group> m_groupVector;
 
 public:
-    BoardLogic(int bs) : m_BoardSize(bs) {}
-    int CalculateX(const int& xPixel, const float& margin, const float& cellSize);
-    int CalculateY(const int& yPixel, const float& margin);
-    std::pair<int, int> CalculateXY(const int& xPixel, const int& yPixel, const float& margin);
+    BoardLogic(int boardSize);
+
+    int getBoardSize() const;
+    Stone getCurrentPlayer() const;
+    std::vector<Intersection> getBoardVector() const;
+    void printBoardState();
+    int getInternalIndex(int x, int y) const;
+    bool fieldEmptyAtIndex(int index) const;
+
 };
 
 #endif
