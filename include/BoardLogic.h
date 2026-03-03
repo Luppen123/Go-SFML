@@ -36,11 +36,14 @@ public:
     BoardLogic(int boardSize);
 
     int getBoardSize() const;
+    int getInternalIndex(int x, int y) const;
     Stone getCurrentPlayer() const;
+    bool fieldEmptyAtIndex(int index) const;
     std::vector<Intersection> getBoardVector() const;
     void printBoardState();
-    int getInternalIndex(int x, int y) const;
-    bool fieldEmptyAtIndex(int index) const;
+    void placeStone(int index);
+    std::pair<int, int> coordinatesLogicalToGraphical(int index) const;
+
 
 };
 

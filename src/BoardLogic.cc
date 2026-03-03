@@ -45,8 +45,12 @@ void BoardLogic::printBoardState()
     {
         if (i.isWall())
             std::cout << "N" << " ";
-        else
+        else if (i.isEmpty())
             std::cout << "E" << " ";
+        else if (i.stone == Stone::Black)
+            std::cout << "B" << " ";
+        else
+            std::cout << "W" << " ";
 
         spaceCounter = (spaceCounter + 1) % (m_boardSize+2);
         if (spaceCounter == 0)
@@ -68,8 +72,29 @@ bool BoardLogic::fieldEmptyAtIndex(int index) const
         return false;
 }
 
-// struct Intersection 
-// {
-//     int liberties;
-//     Stone stone = Stone::None;
-// };
+void BoardLogic::placeStone(int index)
+{
+    if(fieldEmptyAtIndex(index))
+    {
+        if(m_currentPlayer == Stone::Black)
+        {
+            m_boardVector[index].stone = Stone::Black;
+            m_currentPlayer = Stone::White;
+        }
+        else
+        {
+            m_boardVector[index].stone = Stone::White;
+            m_currentPlayer = Stone::Black;
+        }
+    }
+}
+
+std::pair<int, int> BoardLogic::coordinatesLogicalToGraphical(int index) const
+{
+    int y = std::floor(index / (m_vectorWidth));
+    int x = index - ((m_vectorWidth) * y);
+
+    return {x-1, y-1};
+}
+
+

@@ -23,11 +23,12 @@ public:
     //TO DO: Wywalic definicje konsturktora z hedeara
 
     void drawBoard();
-    void drawStone(std::pair<int, int> coordinates, Stone player);
-    void drawStoneHiglight(Stone player);
+    void drawStone(int index);
+    void drawStoneHiglight();
 
-    int GetCoordinatesLogical(int pixelX, int pixelY);
-    std::pair<int, int> GetCoordinatesGraphical(int pixelX, int pixelY);
+    int getCoordinatesLogical(int pixelX, int pixelY);
+    std::pair<int, int> getCoordinatesGraphical(int pixelX, int pixelY);
+    std::pair<int, int> getMouseCords();
 };
 
 

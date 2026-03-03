@@ -43,11 +43,6 @@ int BoardRender::pixelToIndex(int pixel) //GRAPHICAL
     return std::clamp(index, 0, m_logic.getBoardSize() - 1);
 }
 
-// int pixelToIndexLogical(int pixel)
-// {
-//     int index = 
-// }
-
 void BoardRender::drawBoard()
 {
     sf::RectangleShape board(sf::Vector2f(370.f, 370.f));
@@ -61,26 +56,52 @@ void BoardRender::drawBoard()
 
     this->drawLines();
     this->drawHoshi();
+
+    for(int index = 0; const auto& i : m_logic.getBoardVector())
+    {
+        if(!(i.isEmpty() || i.isWall()))
+            drawStone(index);
+        ++index;
+    }
 }
 
-void BoardRender::drawStone(std::pair<int, int> coordinates, Stone player)
+//TO DO: function getMouseCords
+// std::pair<int, int> BoardRender::getMouseCords()
+// {
+//     sf::Vector2i mousePos = sf::Mouse::getPosition(m_window);
+//     return getCoordinatesGraphical(mousePos.x, mousePos.y);
+// }
+
+void BoardRender::drawStone(int index)
 {
+    std::pair<int, int> cords = m_logic.coordinatesLogicalToGraphical(index);
+    sf::CircleShape stone((m_cellSize / 2) - 2);
+    stone.setOrigin(stone.getRadius(), stone.getRadius());
 
+    if(m_logic.getBoardVector()[index].stone == Stone::White)
+        stone.setFillColor(sf::Color(255, 255, 255, 255));
+    else
+        stone.setFillColor(sf::Color(0, 0, 0, 255));
+
+    stone.setPosition(m_margin + cords.first * m_cellSize, m_margin + cords.second * m_cellSize);
+
+    m_window.draw(stone);
+    
 }
 
-void BoardRender::drawStoneHiglight(Stone player)
+void BoardRender::drawStoneHiglight()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(m_window);
-    std::pair<int, int> mouseCords = GetCoordinatesGraphical(mousePos.x, mousePos.y);
+    std::pair<int, int> mouseCords = getCoordinatesGraphical(mousePos.x, mousePos.y);
 
-    int vectorIndex = GetCoordinatesLogical(mousePos.x, mousePos.y);
+    int vectorIndex = getCoordinatesLogical(mousePos.x, mousePos.y);
 
     if(m_logic.fieldEmptyAtIndex(vectorIndex))
     {
         sf::CircleShape stone((m_cellSize / 2) - 2);
         stone.setOrigin(stone.getRadius(), stone.getRadius());
 
-        if(player == Stone::White)
+        if(m_logic.getCurrentPlayer() == Stone::White)
             stone.setFillColor(sf::Color(255, 255, 255, 128));
         else
             stone.setFillColor(sf::Color(0, 0, 0, 200));
@@ -91,7 +112,7 @@ void BoardRender::drawStoneHiglight(Stone player)
 
 }
 
-int BoardRender::GetCoordinatesLogical(int pixelX, int pixelY)
+int BoardRender::getCoordinatesLogical(int pixelX, int pixelY)
 {                                                           
     int x = pixelToIndex(pixelX);                           
     int y = pixelToIndex(pixelY);
@@ -99,7 +120,7 @@ int BoardRender::GetCoordinatesLogical(int pixelX, int pixelY)
     return m_logic.getInternalIndex(x,y);
 }
 
-std::pair<int, int> BoardRender::GetCoordinatesGraphical(int pixelX, int pixelY)
+std::pair<int, int> BoardRender::getCoordinatesGraphical(int pixelX, int pixelY)
 {
     return {pixelToIndex(pixelX), pixelToIndex(pixelY)};
 }

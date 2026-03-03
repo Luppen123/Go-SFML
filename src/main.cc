@@ -27,7 +27,6 @@ int main()
     int boardSize = 9;
     float cellSize = 40.f;
     float margin = 25.f;
-
     //Zrobic z tego stale albo wczytac jako input
     
 
@@ -35,6 +34,7 @@ int main()
     bl.printBoardState();
     BoardRender br(window, cellSize, margin, bl);
 
+    Stone player = Stone::Black;
     
     while (window.isOpen())
     {
@@ -45,23 +45,21 @@ int main()
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                // std::cout << event.mouseButton.x << std::endl;
-                // std::cout << event.mouseButton.y << std::endl;
-                int cord = br.GetCoordinatesLogical(event.mouseButton.x, event.mouseButton.y);
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                std::pair<int, int> mouseCords = br.getCoordinatesGraphical(mousePos.x, mousePos.y);
 
-                std::cout << cord << std::endl;
+                int index = br.getCoordinatesLogical(mousePos.x, mousePos.y);
+                bl.placeStone(index);
+                bl.printBoardState();
+
             }
                 
         }
 
-        
-        // sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-        // std::pair<int, int> mouseCords = br.GetCoordinatesGraphical(mousePos.x, mousePos.y);
-        // std::cout << mouseCords.first << " " << mouseCords.second << std::endl;
-        
         window.clear();
         br.drawBoard();
-        br.drawStoneHiglight(Stone::White);
+        br.drawStone(12);
+        br.drawStoneHiglight();
         window.display();
     }
 
