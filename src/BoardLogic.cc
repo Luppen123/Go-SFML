@@ -56,6 +56,7 @@ void BoardLogic::printBoardState()
         if (spaceCounter == 0)
             std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 int BoardLogic::getInternalIndex(int x, int y) const 

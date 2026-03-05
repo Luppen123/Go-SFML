@@ -58,7 +58,6 @@ int main()
 
         window.clear();
         br.drawBoard();
-        br.drawStone(12);
         br.drawStoneHiglight();
         window.display();
     }
