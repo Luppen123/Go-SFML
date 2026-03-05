@@ -16,6 +16,7 @@ class Board
 {
 private:
     int m_boardSize;
+    int m_vectorWidth;
     std::vector<Intersection> m_boardState;
 
 public:
@@ -27,6 +28,8 @@ public:
     std::vector<Intersection> getBoardState() const;
 
     bool isEmptyAt(int index) const;
+
+    void setStone(int index, Stone color);
 };
 
 

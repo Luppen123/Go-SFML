@@ -11,6 +11,11 @@ Stone GameLogic::getCurrentPlayer() const
     return m_currentPlayer;
 }
 
+const Board& GameLogic::getBoard() const
+{
+    return m_board;
+}
+
 void GameLogic::placeStone(int index)
 {
     if(m_board.isEmptyAt(index))

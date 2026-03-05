@@ -1,5 +1,6 @@
 #include "BoardLogic.h"
 
+
 BoardLogic::BoardLogic(int boardSize)
 {
     m_currentPlayer = Stone::Black;

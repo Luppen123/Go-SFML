@@ -22,6 +22,7 @@ public:
     GameLogic(Board board);
 
     Stone getCurrentPlayer() const;
+    const Board& getBoard() const;
 
     void placeStone(int index);
     void changePlayer();

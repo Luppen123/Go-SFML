@@ -112,6 +112,7 @@ void BoardRender::drawStoneHiglight()
 
 }
 
+//Role of Board.cpp
 int BoardRender::getCoordinatesLogical(int pixelX, int pixelY)
 {                                                           
     int x = pixelToIndex(pixelX);                           
@@ -120,6 +121,7 @@ int BoardRender::getCoordinatesLogical(int pixelX, int pixelY)
     return m_logic.getInternalIndex(x,y);
 }
 
+//Just pixelsToCoordinates
 std::pair<int, int> BoardRender::getCoordinatesGraphical(int pixelX, int pixelY)
 {
     return {pixelToIndex(pixelX), pixelToIndex(pixelY)};
