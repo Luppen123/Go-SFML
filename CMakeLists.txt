@@ -40,6 +40,7 @@ target_sources(Headers
         FILES
             include/BoardRender.h
             include/BoardLogic.h
+            #include/Graphic/BoardPainter.h
 )
 
 target_link_libraries(Headers

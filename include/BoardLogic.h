@@ -1,11 +1,12 @@
-#ifndef BOARD_LOGIC_H
-#define BOARD_LOGIC_H
+#ifndef BOARD_Hd
+#define BOARD_Hd
 
 #include <utility>
 #include <vector>
 #include <set>
 #include <cmath>
 #include <iostream>
+
 #include "Stone.h"
 
 struct Intersection 
@@ -23,26 +24,27 @@ struct Group
     std::set<std::pair<int, int>> liberties;
 };
 
+
 class BoardLogic
 {
 private:
-    Stone m_currentPlayer;
-    int m_boardSize;
-    int m_vectorWidth;
-    std::vector<Intersection> m_boardVector;
-    std::vector<Group> m_groupVector;
+    Stone m_currentPlayer;      //GameLogic Y
+    int m_boardSize;            //Board Y
+    int m_vectorWidth;          //Board, I guess can be taken via method
+    std::vector<Intersection> m_boardVector;    //Board Y 
+    std::vector<Group> m_groupVector;   //GameLogic Y
 
 public:
     BoardLogic(int boardSize);
 
-    int getBoardSize() const;
-    int getInternalIndex(int x, int y) const;
-    Stone getCurrentPlayer() const;
-    bool fieldEmptyAtIndex(int index) const;
-    std::vector<Intersection> getBoardVector() const;
-    void printBoardState();
-    void placeStone(int index);
-    std::pair<int, int> coordinatesLogicalToGraphical(int index) const;
+    int getBoardSize() const;   //Board Y
+    int getInternalIndex(int x, int y) const;   //board Y
+    Stone getCurrentPlayer() const; //GameLogic
+    bool fieldEmptyAtIndex(int index) const;    //board Y
+    std::vector<Intersection> getBoardVector() const;   //board Y
+    void printBoardState(); // View???
+    void placeStone(int index); //GameLogic
+    std::pair<int, int> coordinatesLogicalToGraphical(int index) const;     //view
 
 
 };
