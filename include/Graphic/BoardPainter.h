@@ -12,15 +12,23 @@ class BoardPainter
 private:
     sf::RenderWindow& m_window;
     const Board& m_board;
+    const GameGeometry& m_gameGeometry;
+
+    sf::VertexArray m_linesArray;
+    sf::CircleShape m_hoshiShape;
+    sf::CircleShape m_stoneShape;
+    sf::RectangleShape m_boardShape;
 
     void drawLines();
     void drawHoshi(); 
 
 public:
-    BoardPainter(sf::RenderWindow& window, const Board& board);
+    BoardPainter(sf::RenderWindow& window, const Board& board, const GameGeometry& gameGeometry);
 
+    void drawStoneHighlight();
+    void drawStone();
+    void drawBoard();
     
-
 };
 
 #endif

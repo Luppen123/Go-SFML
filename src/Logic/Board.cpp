@@ -26,7 +26,7 @@ int Board::getBoardSize() const
     return m_boardSize;
 }
 
-int Board::convertToVectorIndex(int x, int y) const
+int Board::convertCoordinatesToIndex(int x, int y) const
 {
     return (m_vectorWidth * (y + 1)) + (x + 1);         
 }

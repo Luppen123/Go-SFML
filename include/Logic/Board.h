@@ -23,7 +23,7 @@ public:
     Board(int boardSize);
 
     int getBoardSize() const;
-    int convertToVectorIndex(int x, int y) const;
+    int convertCoordinatesToIndex(int x, int y) const;
 
     std::vector<Intersection> getBoardState() const;
 

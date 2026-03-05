@@ -22,8 +22,9 @@ public:
     GameGeometry(float cellSize, float margin, int boardSize);
 
     Coordinate pixelsToCoordinates(int px, int py); 
-    float getCellSize();
-    float getMargin();
+    float getCellSize() const;
+    float getMargin() const;
+    float getBoardSize() const;
 };
 
 #endif

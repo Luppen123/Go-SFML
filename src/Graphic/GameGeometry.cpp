@@ -17,12 +17,18 @@ Coordinate GameGeometry::pixelsToCoordinates(int px, int py)
     return {x, y};
 }
 
-float GameGeometry::getCellSize()
+float GameGeometry::getCellSize() const
 {
     return m_cellSize;
 }
 
-float GameGeometry::getMargin()
+float GameGeometry::getMargin() const
 {
     return m_margin;
 }
+
+float GameGeometry::getBoardSize() const
+{
+    return m_boardSize;
+}
+
