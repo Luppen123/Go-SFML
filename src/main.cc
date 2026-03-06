@@ -57,8 +57,8 @@ int main()
                 std::cout << coordinates.x << " " << coordinates.y << std::endl;
                 int index = board.convertCoordinatesToIndex(coordinates);
                 std::cout << index << std::endl;
-                // gameLogic.placeStone(index);
-                // board.printBoardState();
+                gameLogic.placeStone(index);
+                board.printBoardState();
 
             }
                 
