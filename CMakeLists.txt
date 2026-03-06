@@ -31,7 +31,7 @@ add_library(Headers)
 
 target_sources(Headers
     PRIVATE
-        src/Grahpic/BoardPainter.cc
+        src/Graphic/BoardPainter.cc
         src/Graphic/GameGeometry.cc
         src/Logic/Board.cc
         src/Logic/GameLogic.cc
@@ -41,7 +41,7 @@ target_sources(Headers
             include
         FILES
             include/Graphic/BoardPainter.h
-            include/Graphic/BoardGeometry.h
+            include/Graphic/GameGeometry.h
             include/Logic/Board.h
             include/Logic/GameLogic.h
 )

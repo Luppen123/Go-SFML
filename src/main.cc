@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "BoardPainter.h"
-#include "GameLogic.h"
+#include "Graphic/BoardPainter.h"
+#include "Logic/GameLogic.h"
 
 int main()
 {

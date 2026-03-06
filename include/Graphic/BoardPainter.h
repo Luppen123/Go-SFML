@@ -2,7 +2,7 @@
 #define BOARD_PAINTER_H
 
 #include "GameGeometry.h"
-#include "Logic/Board.h"
+#include "Board.h"
 #include <SFML/Graphics.hpp>
 
 
