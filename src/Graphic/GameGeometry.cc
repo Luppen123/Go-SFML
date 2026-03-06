@@ -12,7 +12,7 @@ Coordinate GameGeometry::pixelsToCoordinates(int px, int py) const
     int y = std::round((static_cast<float>(py) - m_margin) / m_cellSize);
 
     x = std::clamp(x, 0, m_boardSize - 1);
-    y = std::clamp(x, 0, m_boardSize - 1);
+    y = std::clamp(y, 0, m_boardSize - 1);
 
     return {x, y};
 }
