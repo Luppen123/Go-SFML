@@ -1,6 +1,6 @@
 #include "Logic/GameLogic.h"
 
-GameLogic::GameLogic(Board board) : m_board(board)
+GameLogic::GameLogic(Board& board) : m_board(board)
 {
     m_currentPlayer = Stone::Black;
     m_groupVector.reserve(100);
@@ -29,4 +29,3 @@ void GameLogic::changePlayer()
 {
     m_currentPlayer = (m_currentPlayer == Stone::Black) ? Stone::White : Stone::Black;
 }
-

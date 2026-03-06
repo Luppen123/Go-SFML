@@ -89,15 +89,19 @@ void BoardPainter::drawStoneHighlight(Stone currentPlayer)
 
     sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
 
+
     //Maybe do a function later?
     Coordinate coordinates = m_gameGeometry.pixelsToCoordinates(mousePosition.x, mousePosition.y);
     int index = m_board.convertCoordinatesToIndex(coordinates);
     //endComment
 
     auto boardState = m_board.getBoardState();
+    float margin = m_gameGeometry.getMargin();
+    float cellSize = m_gameGeometry.getCellSize();
     if(boardState[index].isEmpty())
     {
-
+        m_stoneShape.setPosition(margin + coordinates.x * cellSize, margin + coordinates.y * cellSize);
+        m_window.draw(m_stoneShape);
     }
 
 }
@@ -111,6 +115,7 @@ void BoardPainter::drawStone(int index)
     float cellSize = m_gameGeometry.getCellSize();
     float margin = m_gameGeometry.getMargin();
     m_stoneShape.setPosition(margin + coordinates.x * cellSize, margin + coordinates.y * cellSize);
+    m_window.draw(m_stoneShape);
 }
 
 void BoardPainter::drawBoard()

@@ -19,13 +19,14 @@ private:
     std::vector<Group> m_groupVector;
 
 public:
-    GameLogic(Board board);
+    GameLogic(Board& board);
 
     Stone getCurrentPlayer() const;
     const Board& getBoard() const;
 
     void placeStone(int index);
     void changePlayer();
+
 };
 
 #endif

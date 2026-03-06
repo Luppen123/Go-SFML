@@ -64,9 +64,9 @@ void Board::printBoardState() const
     for(const auto& i : m_boardState)
     {
         if (i.isWall())
-            std::cout << "N" << " ";
+            std::cout << "*" << " ";
         else if (i.isEmpty())
-            std::cout << "E" << " ";
+            std::cout << "-" << " ";
         else if (i.stone == Stone::Black)
             std::cout << "B" << " ";
         else
