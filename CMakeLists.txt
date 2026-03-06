@@ -31,17 +31,19 @@ add_library(Headers)
 
 target_sources(Headers
     PRIVATE
-        src/Grahpic/BoardPainter.cpp
-        src/Grahpic/GameGeometry.cpp
-        src/Logic/Board.cpp
+        src/Grahpic/BoardPainter.cc
+        src/Grahpic/GameGeometry.cc
+        src/Logic/Board.cc
+        src/Logic/GameLogic.cc
     PUBLIC
         FILE_SET HEADERS
         BASE_DIRS
             include
         FILES
-            include/BoardRender.h
-            include/BoardLogic.h
-            #include/Graphic/BoardPainter.h
+            include/Graphic/BoardPainter.h
+            include/Graphic/BoardGeometry.h
+            include/Logic/Board.h
+            include/Logic/GameLogic.h
 )
 
 target_link_libraries(Headers
