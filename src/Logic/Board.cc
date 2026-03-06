@@ -27,7 +27,7 @@ int Board::getBoardSize() const
 
 int Board::convertCoordinatesToIndex(Coordinate coordinates) const
 {
-    return (m_vectorWidth * (coordinates.x + 1)) + (coordinates.y + 1);         
+    return (m_vectorWidth * (coordinates.y + 1)) + (coordinates.x + 1);         
 }
 
 Coordinate Board::convertIndexToCoordinates(int index) const

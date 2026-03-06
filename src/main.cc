@@ -54,6 +54,7 @@ int main()
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
                 Coordinate coordinates = gameGeometry.pixelsToCoordinates(mousePosition.x, mousePosition.y);
+                std::cout << coordinates.x << " " << coordinates.y << std::endl;
                 int index = board.convertCoordinatesToIndex(coordinates);
                 std::cout << index << std::endl;
                 // gameLogic.placeStone(index);
