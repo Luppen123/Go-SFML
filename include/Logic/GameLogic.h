@@ -14,7 +14,7 @@ struct Group
 class GameLogic
 {
 private:
-    Board m_board;
+    Board& m_board;
     Stone m_currentPlayer;
     std::vector<Group> m_groupVector;
 
