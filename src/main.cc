@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "BoardRender.h"
-#include "BoardLogic.h"
+#include "BoardPainter.h"
+#include "GameLogic.h"
 
 int main()
 {
@@ -29,12 +29,17 @@ int main()
     float margin = 25.f;
     //Zrobic z tego stale albo wczytac jako input
     
+    Board board(boardSize);
+    GameLogic gameLogic(board);
+    GameGeometry gameGeometry(cellSize, margin, board.getBoardSize());
+    BoardPainter boardPainter(window, board, gameGeometry);
 
-    BoardLogic bl(boardSize);
-    bl.printBoardState();
-    BoardRender br(window, cellSize, margin, bl);
 
-    Stone player = Stone::Black;
+    // BoardLogic bl(boardSize);
+    // bl.printBoardState();
+    // BoardRender br(window, cellSize, margin, bl);
+
+    // Stone player = Stone::Black;
     
     while (window.isOpen())
     {
@@ -45,20 +50,21 @@ int main()
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-                std::pair<int, int> mouseCords = br.getCoordinatesGraphical(mousePos.x, mousePos.y);
+                //create pixelToIndex later bruh
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-                int index = br.getCoordinatesLogical(mousePos.x, mousePos.y);
-                bl.placeStone(index);
-                bl.printBoardState();
+                Coordinate coordinates = gameGeometry.pixelsToCoordinates(mousePosition.x, mousePosition.y);
+                int index = board.convertCoordinatesToIndex(coordinates);
+                gameLogic.placeStone(index);
+                board.printBoardState();
 
             }
                 
         }
 
         window.clear();
-        br.drawBoard();
-        br.drawStoneHiglight();
+        boardPainter.drawBoard();
+        boardPainter.drawStoneHighlight(gameLogic.getCurrentPlayer());
         window.display();
     }
 

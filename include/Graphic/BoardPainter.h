@@ -16,6 +16,7 @@ private:
 
     sf::VertexArray m_linesArray;
     sf::CircleShape m_hoshiShape;
+    std::vector<sf::Vector2f> m_hoshiPositions;
     sf::CircleShape m_stoneShape;
     sf::RectangleShape m_boardShape;
 
@@ -25,8 +26,8 @@ private:
 public:
     BoardPainter(sf::RenderWindow& window, const Board& board, const GameGeometry& gameGeometry);
 
-    void drawStoneHighlight();
-    void drawStone();
+    void drawStoneHighlight(Stone currentPlayer);
+    void drawStone(int index);
     void drawBoard();
     
 };

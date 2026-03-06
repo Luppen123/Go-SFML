@@ -31,8 +31,9 @@ add_library(Headers)
 
 target_sources(Headers
     PRIVATE
-        src/BoardRender.cc
-        src/BoardLogic.cc
+        src/Grahpic/BoardPainter.cpp
+        src/Grahpic/GameGeometry.cpp
+        src/Logic/Board.cpp
     PUBLIC
         FILE_SET HEADERS
         BASE_DIRS

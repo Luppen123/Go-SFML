@@ -3,13 +3,7 @@
 
 #include <cmath>
 #include <algorithm>
-
-
-struct Coordinate
-{
-    int x;
-    int y;
-};
+#include "Common.h"
 
 class GameGeometry
 {
@@ -21,7 +15,7 @@ private:
 public:
     GameGeometry(float cellSize, float margin, int boardSize);
 
-    Coordinate pixelsToCoordinates(int px, int py); 
+    Coordinate pixelsToCoordinates(int px, int py) const; 
     float getCellSize() const;
     float getMargin() const;
     float getBoardSize() const;

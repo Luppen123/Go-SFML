@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "Stone.h"
+#include "Common.h"
 #include <vector>
 
 struct Intersection 
@@ -23,13 +23,18 @@ public:
     Board(int boardSize);
 
     int getBoardSize() const;
-    int convertCoordinatesToIndex(int x, int y) const;
+    int convertCoordinatesToIndex(Coordinate coordinates) const;
+    Coordinate convertIndexToCoordinates(int index) const;
 
     std::vector<Intersection> getBoardState() const;
 
     bool isEmptyAt(int index) const;
 
     void setStone(int index, Stone color);
+    Stone getStone(int index) const;
+
+    //test function
+    void printBoardState() const;
 };
 
 
