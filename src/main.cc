@@ -55,8 +55,9 @@ int main()
 
                 Coordinate coordinates = gameGeometry.pixelsToCoordinates(mousePosition.x, mousePosition.y);
                 int index = board.convertCoordinatesToIndex(coordinates);
-                gameLogic.placeStone(index);
-                board.printBoardState();
+                std::cout << index << std::endl;
+                // gameLogic.placeStone(index);
+                // board.printBoardState();
 
             }
                 
