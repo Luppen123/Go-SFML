@@ -3,6 +3,8 @@
 
 #include "Common.h"
 #include <vector>
+#include <iostream>
+#include <cmath>
 
 struct Intersection 
 {

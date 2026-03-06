@@ -1,4 +1,4 @@
-#include "GameLogic.h"
+#include "Logic/GameLogic.h"
 
 GameLogic::GameLogic(Board board) : m_board(board)
 {

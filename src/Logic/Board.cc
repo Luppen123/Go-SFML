@@ -1,6 +1,4 @@
-#include "Board.h"
-#include <cmath>
-#include <iostream>
+#include "Logic/Board.h"
 
 Board::Board(int boardSize)
 {

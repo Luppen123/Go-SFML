@@ -1,4 +1,4 @@
-#include "BoardPainter.h"
+#include "Graphic/BoardPainter.h"
 
 BoardPainter::BoardPainter(sf::RenderWindow& window, const Board& board, const GameGeometry& gameGeometry) :
     m_window(window),

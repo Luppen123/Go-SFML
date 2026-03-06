@@ -1,4 +1,4 @@
-#include "GameGeometry.h"
+#include "Graphic/GameGeometry.h"
 
 GameGeometry::GameGeometry(float cellSize, float margin, int boardSize) :
     m_cellSize(cellSize), 
