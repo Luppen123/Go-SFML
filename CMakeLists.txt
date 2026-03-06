@@ -32,7 +32,7 @@ add_library(Headers)
 target_sources(Headers
     PRIVATE
         src/Grahpic/BoardPainter.cc
-        src/Grahpic/GameGeometry.cc
+        src/Graphic/GameGeometry.cc
         src/Logic/Board.cc
         src/Logic/GameLogic.cc
     PUBLIC
