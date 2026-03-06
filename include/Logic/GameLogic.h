@@ -1,7 +1,7 @@
 #ifndef GAME_LOGIC_H
 #define GAME_LOGIC_H
 
-#include "Board.h"
+#include "Logic/Board.h"
 #include <set>
 
 struct Group

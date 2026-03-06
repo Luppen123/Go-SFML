@@ -1,8 +1,8 @@
 #ifndef BOARD_PAINTER_H
 #define BOARD_PAINTER_H
 
-#include "GameGeometry.h"
-#include "Board.h"
+#include "Graphic/GameGeometry.h"
+#include "Logic/Board.h"
 #include <SFML/Graphics.hpp>
 
 
