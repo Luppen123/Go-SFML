@@ -3,7 +3,19 @@
 GameLogic::GameLogic(Board& board) : m_board(board)
 {
     m_currentPlayer = Stone::Black;
-    m_groups.reserve(100);
+    m_score = {6.5, 0};
+}
+
+void GameLogic::incrementScore(Stone color)
+{
+    color == Stone::Black ? m_score.Black++ : m_score.White++;
+}
+
+Score GameLogic::getScore() const
+{
+    std::cout << "Current Score:" << '\n';
+    std::cout << "White: " << m_score.White << '\n' << "Black: " << m_score.Black << '\n';
+    return m_score;
 }
 
 Stone GameLogic::getCurrentPlayer() const
@@ -16,18 +28,8 @@ const Board& GameLogic::getBoard() const
     return m_board;
 }
 
-void GameLogic::placeStone(int index)
+void GameLogic::checkNeighbours(const Coordinate& stoneCoordinates, std::vector<bool>& visited)
 {
-    if(!m_board.isEmptyAt(index))
-        return;
-
-    int boardSize = m_board.getBoardSize();
-    std::vector<bool> visited(boardSize*boardSize, false);
-
-    m_board.setStone(index, m_currentPlayer);
-    Coordinate stoneCoordinates = m_board.convertIndexToCoordinates(index);
-
-
     for(const auto& direction : DIRECTIONS)
     {
         Coordinate neighbourCoordinates = {stoneCoordinates.x + direction.x, stoneCoordinates.y + direction.y};
@@ -47,27 +49,23 @@ void GameLogic::placeStone(int index)
             }
 
             if(enemyGroup.libertyCount == 0)
-                m_board.deleteGroup(enemyGroup.stoneCoordinates);
+                this->captureGroup(enemyGroup.stoneCoordinates);
         }
     }
-
-    Group selfGroup = floodFill(stoneCoordinates, m_currentPlayer);
-    if(selfGroup.libertyCount == 0)
-    {
-        m_board.setStone(stoneCoordinates, Stone::None);
-        return;
-    }
-
-    m_board.setStone(index, m_currentPlayer);
-    this->changePlayer();
 }
 
-void GameLogic::changePlayer()
+bool GameLogic::isSuicide(const Coordinate& stoneCoordinates)
 {
-    m_currentPlayer = (m_currentPlayer == Stone::Black) ? Stone::White : Stone::Black;
+    Group selfGroup = floodFill(stoneCoordinates, m_currentPlayer);
+    return selfGroup.libertyCount == 0;
 }
 
-Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor)
+bool GameLogic::isKoViolation()
+{
+    return m_board.getPreviousBoardState() == m_board.getBoardState();
+}
+
+Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor) const
 {
     int boardSize = m_board.getBoardSize();
 
@@ -90,7 +88,7 @@ Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor)
         for(const auto& direction : DIRECTIONS)
         {
             Coordinate neighbourCoordinates = {currentStoneCoordinates.x + direction.x, currentStoneCoordinates.y + direction.y};
-            std::cout << neighbourCoordinates.x << " " << neighbourCoordinates.y << std::endl;
+            
             if(!m_board.isLegal(neighbourCoordinates))
                 continue;
 
@@ -111,3 +109,48 @@ Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor)
     }
     return {(int)liberties.size(), stones};
 }
+
+void GameLogic::placeStone(int index)
+{
+    if(!m_board.isEmptyAt(index))
+        return;
+
+    int boardSize = m_board.getBoardSize();
+    std::vector<bool> visited(boardSize*boardSize, false);
+
+    Coordinate stoneCoordinates = m_board.convertIndexToCoordinates(index);
+    std::vector<Intersection> boardStateBeforePlacement = m_board.getBoardState();
+    m_board.setStone(index, m_currentPlayer);
+
+    this->checkNeighbours(stoneCoordinates, visited);
+
+    if(this->isSuicide(stoneCoordinates))
+    {
+        m_board.setStone(stoneCoordinates, Stone::None);
+        return;
+    }
+
+    if(this->isKoViolation())
+    {
+        m_board.setBoardState(boardStateBeforePlacement);
+        return;
+    }
+
+    this->changePlayer();
+    m_board.setPreviousBoardState(boardStateBeforePlacement);
+}
+
+void GameLogic::captureGroup(std::vector<Coordinate>& group)
+{
+    for(auto& stone : group)
+    {
+        m_board.setStone(stone, Stone::None);
+        this->incrementScore(m_currentPlayer);
+    }
+}
+
+void GameLogic::changePlayer()
+{
+    m_currentPlayer = (m_currentPlayer == Stone::Black) ? Stone::White : Stone::Black;
+}
+

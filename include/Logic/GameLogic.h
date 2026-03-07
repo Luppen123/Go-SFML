@@ -7,9 +7,14 @@
 
 struct Group
 {
-    //Stone color;
     int libertyCount;
     std::vector<Coordinate> stoneCoordinates;
+};
+
+struct Score
+{
+    float White;
+    float Black;
 };
 
 class GameLogic
@@ -17,18 +22,27 @@ class GameLogic
 private:
     Board& m_board;
     Stone m_currentPlayer;
-    std::vector<Group> m_groups; //usunac perhaps
+    Score m_score;    
 
 public:
     GameLogic(Board& board);
 
+    void incrementScore(Stone color);
+    Score getScore() const;
+
     Stone getCurrentPlayer() const;
-    const Board& getBoard() const;
+    const Board& getBoard() const; //probably not needed
 
+    void checkNeighbours(const Coordinate& stoneCoordinates, std::vector<bool>& visited);
+    bool isSuicide(const Coordinate& stoneCoordinates );
+    bool isKoViolation();
+
+    Group floodFill(Coordinate coordinates, Stone currentPlayer) const;
     void placeStone(int index);
-    void changePlayer();
+    void captureGroup(std::vector<Coordinate>& group);
 
-    Group floodFill(Coordinate coordinates, Stone currentPlayer);
+
+    void changePlayer();
 
 };
 

@@ -14,12 +14,6 @@ int main()
     sf::RenderWindow window(sf::VideoMode(370,370), "Go Prot", sf::Style::Close, settings);
     window.setFramerateLimit(60);
 
-    sf::RectangleShape boardShape(sf::Vector2f(370.f, 370.f));
-    boardShape.setFillColor(sf::Color(245, 170, 59, 255));
-
-    //origin set to the middle of the board itself
-    boardShape.setOrigin(boardShape.getSize() / 2.f);
-    boardShape.setPosition(sf::Vector2f(window.getSize()) / 2.f);
     //DODAC JAKO CZESC WIDKOU
 
 
@@ -56,7 +50,7 @@ int main()
                 Coordinate coordinates = gameGeometry.pixelsToCoordinates(mousePosition.x, mousePosition.y);
                 int index = board.convertCoordinatesToIndex(coordinates);
                 gameLogic.placeStone(index);
-                board.printBoardState();
+                //board.printBoardState();
 
             }
                 

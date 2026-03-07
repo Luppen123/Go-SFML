@@ -25,6 +25,11 @@ int Board::getBoardSize() const
     return m_boardSize;
 }
 
+void Board::setBoardState(const std::vector<Intersection>& newBoardState)
+{
+    m_boardState = newBoardState;
+}
+
 int Board::convertCoordinatesToIndex(Coordinate coordinates) const
 {
     return (m_vectorWidth * (coordinates.y + 1)) + (coordinates.x + 1);         
@@ -71,6 +76,16 @@ void Board::setStone(Coordinate coordinates, Stone color)
     m_boardState[index].stone = color;
 }
 
+void Board::setPreviousBoardState(std::vector<Intersection> boardState)
+{
+    m_previousBoardState = boardState;
+}
+
+std::vector<Intersection> Board::getPreviousBoardState() const
+{
+    return m_previousBoardState;
+}
+
 Stone Board::getStone(int index) const
 {
     return m_boardState[index].stone;
@@ -82,13 +97,7 @@ Stone Board::getStone(Coordinate coordinates) const
     return m_boardState[index].stone;
 }
 
-void Board::deleteGroup(std::vector<Coordinate>& stones)
-{
-    for(auto& stone : stones)
-    {
-        this->setStone(stone, Stone::None);
-    }
-}
+
 
 void Board::printBoardState() const
 {
