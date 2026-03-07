@@ -3,12 +3,13 @@
 
 #include "Logic/Board.h"
 #include <set>
+#include <queue>
 
 struct Group
 {
-    Stone color;
-    std::vector<std::pair<int, int>> stonesCount;
-    std::set<std::pair<int, int>> liberties;
+    //Stone color;
+    int libertyCount;
+    std::vector<Coordinate> stoneCoordinates;
 };
 
 class GameLogic
@@ -16,7 +17,7 @@ class GameLogic
 private:
     Board& m_board;
     Stone m_currentPlayer;
-    std::vector<Group> m_groupVector;
+    std::vector<Group> m_groups; //usunac perhaps
 
 public:
     GameLogic(Board& board);
@@ -26,6 +27,8 @@ public:
 
     void placeStone(int index);
     void changePlayer();
+
+    Group floodFill(Coordinate coordinates, Stone currentPlayer);
 
 };
 

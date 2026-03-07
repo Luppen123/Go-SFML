@@ -31,9 +31,16 @@ public:
     std::vector<Intersection> getBoardState() const;
 
     bool isEmptyAt(int index) const;
+    bool isLegal(int index) const;
+    bool isLegal(Coordinate coordinates) const;
 
     void setStone(int index, Stone color);
+    void setStone(Coordinate coordinates, Stone color);
+
     Stone getStone(int index) const;
+    Stone getStone(Coordinate coordinates) const;
+
+    void deleteGroup(std::vector<Coordinate>& stones);
 
     //test function
     void printBoardState() const;
