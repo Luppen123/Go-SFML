@@ -1,66 +1,29 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Graphic/BoardPainter.h"
-#include "Logic/GameLogic.h"
+#include <Controllers/GameController.h>
 
 int main()
 {
-
-    //DODAC JAKO CZESC WIDOKU
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
-    sf::RenderWindow window(sf::VideoMode(370,370), "Go Prot", sf::Style::Close, settings);
-    window.setFramerateLimit(60);
-
-    //DODAC JAKO CZESC WIDKOU
-
-
-    //Zrobic z tego stale albo wczytac jako input
-    int boardSize = 9;
+    //Wczytac z menu
+    int boardSize = 19;
     float cellSize = 40.f;
     float margin = 25.f;
-    //Zrobic z tego stale albo wczytac jako input
-    
-    Board board(boardSize);
-    GameLogic gameLogic(board);
-    GameGeometry gameGeometry(cellSize, margin, board.getBoardSize());
-    BoardPainter boardPainter(window, board, gameGeometry);
 
+    sf::RenderWindow window(sf::VideoMode((boardSize - 1) * cellSize + 2 * margin,(boardSize - 1) * cellSize + 2 * margin), "Go Prot", sf::Style::Close, settings);
 
-    // BoardLogic bl(boardSize);
-    // bl.printBoardState();
-    // BoardRender br(window, cellSize, margin, bl);
+    // window.setSize(sf::Vector2u(370,370));
+    // while(window.isOpen())
+    // {
+    //     window.display();
+    // }
 
-    // Stone player = Stone::Black;
-    
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (event.type == sf::Event::MouseButtonPressed)
-            {
-                //create pixelToIndex later bruh
-                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+    GameController gameController(cellSize, margin, boardSize, window);
+    gameController.run();
 
-                Coordinate coordinates = gameGeometry.pixelsToCoordinates(mousePosition.x, mousePosition.y);
-                int index = board.convertCoordinatesToIndex(coordinates);
-                gameLogic.placeStone(index);
-                //board.printBoardState();
-
-            }
-                
-        }
-
-        window.clear();
-        boardPainter.drawBoard();
-        boardPainter.drawStoneHighlight(gameLogic.getCurrentPlayer());
-        window.display();
-    }
 
     return 0;
 }

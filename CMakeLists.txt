@@ -35,6 +35,7 @@ target_sources(Headers
         src/Graphic/GameGeometry.cc
         src/Logic/Board.cc
         src/Logic/GameLogic.cc
+        src/Controllers/GameController.cc
     PUBLIC
         FILE_SET HEADERS
         BASE_DIRS
@@ -44,6 +45,7 @@ target_sources(Headers
             include/Graphic/GameGeometry.h
             include/Logic/Board.h
             include/Logic/GameLogic.h
+            include/Controllers/GameController.h
 )
 
 target_link_libraries(Headers
