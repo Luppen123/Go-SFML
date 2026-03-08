@@ -69,12 +69,15 @@ Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor) const
 {
     int boardSize = m_board.getBoardSize();
 
-    std::vector<bool> visited(boardSize*boardSize, false);
+    std::vector<bool> visited((boardSize+2)*(boardSize+2), false);
     std::vector<Coordinate> stones;
     std::set<Coordinate> liberties;
     std::queue<Coordinate> queue;
 
     int startIndex = m_board.convertCoordinatesToIndex(startCoordinates);
+
+    std::cout << startIndex << std::endl;
+    std::cout << startCoordinates.x << " " << startCoordinates.y << std::endl;
     visited[startIndex] = true;
     queue.push(startCoordinates);
     stones.push_back(startCoordinates);
@@ -116,7 +119,7 @@ void GameLogic::placeStone(int index)
         return;
 
     int boardSize = m_board.getBoardSize();
-    std::vector<bool> visited(boardSize*boardSize, false);
+    std::vector<bool> visited((boardSize+2)*(boardSize+2), false);
 
     Coordinate stoneCoordinates = m_board.convertIndexToCoordinates(index);
     std::vector<Intersection> boardStateBeforePlacement = m_board.getBoardState();

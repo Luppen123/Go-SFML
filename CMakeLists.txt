@@ -58,7 +58,7 @@ target_link_libraries(main
         sfml-graphics
         Headers
 )
-
+add_compile_options(-D_GLIBCXX_ASSERTIONS)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT main)
 
 
