@@ -76,8 +76,6 @@ Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor) const
 
     int startIndex = m_board.convertCoordinatesToIndex(startCoordinates);
 
-    std::cout << startIndex << std::endl;
-    std::cout << startCoordinates.x << " " << startCoordinates.y << std::endl;
     visited[startIndex] = true;
     queue.push(startCoordinates);
     stones.push_back(startCoordinates);

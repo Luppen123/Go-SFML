@@ -35,7 +35,7 @@ void GameController::processEvents()
 
             int index = m_board.convertCoordinatesToIndex(coordinates);
             m_gameLogic.placeStone(index);
-            m_board.printBoardState(); //DEBUG
+            //m_board.printBoardState(); //DEBUG
         }
     }
 }
