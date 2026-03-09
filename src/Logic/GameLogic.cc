@@ -41,7 +41,7 @@ void GameLogic::checkNeighbours(const Coordinate& stoneCoordinates, std::vector<
 
         if(stone != m_currentPlayer && stone != Stone::None && !visited[index])
         {
-            Group enemyGroup = floodFill(neighbourCoordinates, stone);
+            Group enemyGroup = m_board.floodFill(neighbourCoordinates, stone);
 
             for(const auto& stone : enemyGroup.stoneCoordinates)
             {
@@ -56,58 +56,13 @@ void GameLogic::checkNeighbours(const Coordinate& stoneCoordinates, std::vector<
 
 bool GameLogic::isSuicide(const Coordinate& stoneCoordinates)
 {
-    Group selfGroup = floodFill(stoneCoordinates, m_currentPlayer);
+    Group selfGroup = m_board.floodFill(stoneCoordinates, m_currentPlayer);
     return selfGroup.libertyCount == 0;
 }
 
 bool GameLogic::isKoViolation()
 {
     return m_board.getPreviousBoardState() == m_board.getBoardState();
-}
-
-Group GameLogic::floodFill(Coordinate startCoordinates, Stone groupColor) const
-{
-    int boardSize = m_board.getBoardSize();
-
-    std::vector<bool> visited(boardSize*boardSize, false);
-    std::vector<Coordinate> stones;
-    std::set<Coordinate> liberties;
-    std::queue<Coordinate> queue;
-
-    int startIndex = m_board.convertCoordinatesToIndex(startCoordinates);
-    visited[startIndex] = true;
-    queue.push(startCoordinates);
-    stones.push_back(startCoordinates);
-
-    while(!queue.empty())
-    {
-        Coordinate currentStoneCoordinates = queue.front();
-        queue.pop();
-
-
-        for(const auto& direction : DIRECTIONS)
-        {
-            Coordinate neighbourCoordinates = {currentStoneCoordinates.x + direction.x, currentStoneCoordinates.y + direction.y};
-            
-            if(!m_board.isLegal(neighbourCoordinates))
-                continue;
-
-            Stone neighbourColor = m_board.getStone(neighbourCoordinates);
-            int index = m_board.convertCoordinatesToIndex(neighbourCoordinates);
-
-            if(neighbourColor == groupColor && !visited[index])
-            {
-                visited[index] = true;
-                stones.push_back(neighbourCoordinates);
-                queue.push(neighbourCoordinates);
-            }
-            else if(neighbourColor == Stone::None)
-            {
-                liberties.insert(neighbourCoordinates);
-            }
-        }
-    }
-    return {(int)liberties.size(), stones};
 }
 
 void GameLogic::placeStone(int index)

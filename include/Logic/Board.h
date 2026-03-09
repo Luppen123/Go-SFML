@@ -5,6 +5,14 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <set>
+#include <queue>
+
+struct Group
+{
+    int libertyCount;
+    std::vector<Coordinate> stoneCoordinates;
+};
 
 struct Intersection 
 {
@@ -48,6 +56,7 @@ public:
     Stone getStone(Coordinate coordinates) const;
 
     // void deleteGroup(std::vector<Coordinate>& stones);
+    Group floodFill(Coordinate coordinates, Stone currentPlayer) const;
 
     //test function
     void printBoardState() const;

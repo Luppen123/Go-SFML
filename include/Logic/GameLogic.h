@@ -2,14 +2,6 @@
 #define GAME_LOGIC_H
 
 #include "Logic/Board.h"
-#include <set>
-#include <queue>
-
-struct Group
-{
-    int libertyCount;
-    std::vector<Coordinate> stoneCoordinates;
-};
 
 struct Score
 {
@@ -37,7 +29,6 @@ public:
     bool isSuicide(const Coordinate& stoneCoordinates );
     bool isKoViolation();
 
-    Group floodFill(Coordinate coordinates, Stone currentPlayer) const;
     void placeStone(int index);
     void captureGroup(std::vector<Coordinate>& group);
 

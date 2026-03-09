@@ -97,6 +97,50 @@ Stone Board::getStone(Coordinate coordinates) const
     return m_boardState[index].stone;
 }
 
+Group Board::floodFill(Coordinate startCoordinates, Stone groupColor) const
+{
+    int boardSize = this->getBoardSize();
+
+    std::vector<bool> visited(boardSize*boardSize, false);
+    std::vector<Coordinate> stones;
+    std::set<Coordinate> liberties;
+    std::queue<Coordinate> queue;
+
+    int startIndex = this->convertCoordinatesToIndex(startCoordinates);
+    visited[startIndex] = true;
+    queue.push(startCoordinates);
+    stones.push_back(startCoordinates);
+
+    while(!queue.empty())
+    {
+        Coordinate currentStoneCoordinates = queue.front();
+        queue.pop();
+
+
+        for(const auto& direction : DIRECTIONS)
+        {
+            Coordinate neighbourCoordinates = {currentStoneCoordinates.x + direction.x, currentStoneCoordinates.y + direction.y};
+            
+            if(!this->isLegal(neighbourCoordinates))
+                continue;
+
+            Stone neighbourColor = this->getStone(neighbourCoordinates);
+            int index = this->convertCoordinatesToIndex(neighbourCoordinates);
+
+            if(neighbourColor == groupColor && !visited[index])
+            {
+                visited[index] = true;
+                stones.push_back(neighbourCoordinates);
+                queue.push(neighbourCoordinates);
+            }
+            else if(neighbourColor == Stone::None)
+            {
+                liberties.insert(neighbourCoordinates);
+            }
+        }
+    }
+    return {(int)liberties.size(), stones};
+}
 
 
 void Board::printBoardState() const
