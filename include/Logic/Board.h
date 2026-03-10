@@ -5,6 +5,14 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <set>
+#include <queue>
+
+struct Group
+{
+    int libertyCount;
+    std::vector<Coordinate> stoneCoordinates;
+};
 
 struct Intersection 
 {
@@ -34,6 +42,7 @@ public:
     std::vector<Intersection> getBoardState() const;
     void setBoardState(const std::vector<Intersection>& newBoardState);
 
+    //Maybe move to gameLogic?
     bool isEmptyAt(int index) const;
     bool isLegal(int index) const;
     bool isLegal(Coordinate coordinates) const;
@@ -48,6 +57,7 @@ public:
     Stone getStone(Coordinate coordinates) const;
 
     // void deleteGroup(std::vector<Coordinate>& stones);
+    Group floodFill(Coordinate coordinates, Stone currentPlayer) const;
 
     //test function
     void printBoardState() const;
