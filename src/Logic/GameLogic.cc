@@ -102,6 +102,7 @@ void GameLogic::captureGroup(std::vector<Coordinate>& group)
         m_board.setStone(stone, Stone::None);
         this->incrementScore(m_currentPlayer);
     }
+    //m_score.Black//White += group.size();
 }
 
 void GameLogic::changePlayer()

@@ -42,6 +42,7 @@ public:
     std::vector<Intersection> getBoardState() const;
     void setBoardState(const std::vector<Intersection>& newBoardState);
 
+    //Maybe move to gameLogic?
     bool isEmptyAt(int index) const;
     bool isLegal(int index) const;
     bool isLegal(Coordinate coordinates) const;
