@@ -6,7 +6,7 @@
 struct BensonGroup
 {
     //Stone color; //not needed?
-    //int healthyEyesCount; //just check BorderingRegionIds.size() bruh
+    //int healthyEyesCount; //just check BorderingRegionIds.size() 
     std::set<int> borderingRegionIds;
     //To marked automatically marked stones
     std::vector<Coordinate> stoneCoordinates;

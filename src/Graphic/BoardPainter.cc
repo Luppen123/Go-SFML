@@ -47,7 +47,8 @@ BoardPainter::BoardPainter(sf::RenderWindow& window, const Board& board, const G
                                    {3,15}, {9,15}, {15,15}}; 
             break;
         default:
-            throw "wtf, this shouldn't have happend";
+            //todo
+            break;
     }
 
     for(sf::Vector2f& point : relativeHoshiPoints)
